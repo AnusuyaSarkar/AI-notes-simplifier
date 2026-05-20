@@ -1,0 +1,7 @@
+{
+  "name": "ai-notes-summary-workspace",
+  "private": true,
+  "scripts": {
+    "start": "node \"AI-notes-simplifier/server.js\""
+  }
+}
