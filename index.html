@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Notes Simplifier</title>
+    <meta
+      name="description"
+      content="Turn long class notes into concise summaries, key concepts, and study points."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="module" src="main.js" defer></script>
+  </head>
+  <body>
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+    <main class="shell">
+      <section class="hero card reveal">
+        <div class="hero-copy">
+          <div class="eyebrow">AI Notes Simplifier</div>
+          <h1>Summarize long notes into the main ideas that matter.</h1>
+          <p>
+            Paste a full lecture note, research note, or meeting summary and let the
+            agent extract a compact version with concepts, takeaways, and next steps.
+          </p>
+
+          <div class="hero-stats">
+            <div>
+              <strong id="wordCount">0</strong>
+              <span>words detected</span>
+            </div>
+            <div>
+              <strong id="sentenceCount">0</strong>
+              <span>sentences scored</span>
+            </div>
+            <div>
+              <strong id="summaryLength">5</strong>
+              <span>summary sentences</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="agent-panel">
+          <div class="agent-badge">Local AI agent</div>
+          <ol class="agent-steps">
+            <li>Read and clean the note.</li>
+            <li>Score the important ideas.</li>
+            <li>Build a short study summary.</li>
+          </ol>
+          <div class="agent-tip">
+            Best for notes up to several pages long, but it also works on shorter text.
+          </div>
+        </aside>
+      </section>
+
+      <section class="workspace grid">
+        <article class="card editor reveal">
+          <div class="section-head">
+            <div>
+              <h2>Your note</h2>
+              <p>Paste text or upload a PDF and the agent will turn it into a shorter study note.</p>
+            </div>
+            <button class="ghost-button" id="loadSample" type="button">Load sample</button>
+          </div>
+
+          <div class="upload-box">
+            <div>
+              <strong>Upload PDF</strong>
+              <p>Use a PDF lecture note, article, or handout. The text is extracted in your browser.</p>
+            </div>
+            <label class="upload-button" for="pdfUpload">Choose PDF</label>
+            <input id="pdfUpload" type="file" accept="application/pdf,.pdf" hidden />
+            <button class="ghost-button" id="summarizePdfBtn" type="button">Summarize PDF</button>
+            <span id="pdfFileName">No PDF selected.</span>
+          </div>
+
+          <textarea
+            id="noteInput"
+            aria-label="Note input"
+            placeholder="Paste a lecture note, chapter, or meeting note here..."
+          ></textarea>
+
+          <div class="toolbar">
+            <label class="range-field" for="summarySize">
+              <span>Summary length</span>
+              <div>
+                <input id="summarySize" type="range" min="3" max="9" value="5" />
+                <strong id="summarySizeLabel">5 sentences</strong>
+              </div>
+            </label>
+
+            <button class="primary-button" id="summarizeBtn" type="button">Summarize note</button>
+          </div>
+        </article>
+
+        <article class="card output reveal">
+          <div class="section-head">
+            <div>
+              <h2>Summary</h2>
+              <p>The agent output is organized for quick studying.</p>
+            </div>
+            <div class="output-actions">
+              <button class="ghost-button" id="copyBtn" type="button">Copy summary</button>
+              <button class="ghost-button" id="downloadPdfBtn" type="button">Download summary PDF</button>
+            </div>
+          </div>
+
+          <div class="summary-block">
+            <h3>Main summary</h3>
+            <p id="summaryText">Add a note to generate the summary.</p>
+          </div>
+
+          <div class="results-grid">
+            <section>
+              <h3>Key concepts</h3>
+              <ul id="conceptList"></ul>
+            </section>
+            <section>
+              <h3>Takeaways</h3>
+              <ul id="takeawayList"></ul>
+            </section>
+          </div>
+
+          <div class="footer-note" id="statusText">Ready to analyze your note.</div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
